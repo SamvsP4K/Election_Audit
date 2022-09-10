@@ -9,14 +9,28 @@ import csv
 #file path
 file_path = "resources/election_results.csv"
 
+#accumualtors
+total_votes = 0
+candidate_options = []
+
 #opens file in read mode
 with open(file_path, "r") as election_data:
     file_reader = csv.reader(election_data)
     
+    #reads header row
     headers = next(file_reader)
-    print(headers)
 
-
+    #reads all rows in files
+    for row in file_reader:
+        #adds total votes
+        total_votes +=1
+        #adds unique candidate names
+        candidate_name = row[2]
+        if candidate_name not in candidate_options:
+            candidate_options.append(candidate_name)
+       
+print(candidate_options)
+print(total_votes)
 
 #writes to txt
 with open("analysis.txt","w") as txt:
