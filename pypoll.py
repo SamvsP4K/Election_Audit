@@ -14,6 +14,11 @@ total_votes = 0
 candidate_options = []
 candidate_votes = {}
 
+#winning candiate
+winner = ""
+winner_total_votes = 0
+winner_percentage = 0
+
 #opens file in read mode
 with open(file_path, "r") as election_data:
     file_reader = csv.reader(election_data)
@@ -37,7 +42,16 @@ with open(file_path, "r") as election_data:
     for candidate_name in candidate_votes:
         votes = candidate_votes[candidate_name]
         vote_percentage = round(float(votes/total_votes) * 100,1)    
-        print(f"Candidate {candidate_name} recieved {vote_percentage} % of the vote")
+        print(f"Candidate {candidate_name} recieved {vote_percentage} % of the vote\n")
+
+
+        #determines winner
+        if (votes > winner_total_votes) and (vote_percentage>winner_percentage):
+            winner_total_votes = votes
+            winner_percentage = vote_percentage
+            winner = candidate_name
+    print("------------------------------")
+    print(f"Winner: {winner}\nTotal Votes: {winner_total_votes:,}\nWinning Percentage: {winner_percentage}%")
             
 # print(candidate_options)
 # print(total_votes)
