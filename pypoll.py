@@ -6,13 +6,23 @@
 #5-The winner based on popular vote
 
 import csv 
-
 #file path
+file_path = "resources/election_results.csv"
 
-#opens file 
-election_data = open(file_to_load, "r")
+#opens file in read mode
+with open(file_path, "r") as election_data:
+    file_reader = csv.reader(election_data)
+    
+    headers = next(file_reader)
+    print(headers)
 
 
 
-#closes file
-election_data.close()
+#writes to txt
+with open("analysis.txt","w") as txt:
+    txt.write("Counties in the Elections\n--------------------\nArapahoe\nDenver\nJefferson")
+   
+
+
+
+
