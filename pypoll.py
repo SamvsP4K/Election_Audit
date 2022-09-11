@@ -38,29 +38,42 @@ with open(file_path, "r") as election_data:
             candidate_votes[candidate_name] = 0
 
         candidate_votes[candidate_name] += 1
-            
+        
+#writes to txt
+with open("election_analysis.txt","w") as txt:
+    election_results = (
+    f"\nElection Results\n"
+    f"------------------------\n"
+    f"Total Votes: {total_votes:,}\n"
+    f"------------------------\n")
+    print(election_results,end="")
+
+    #saves results to txt file
+    txt.write(election_results)
+    
     for candidate_name in candidate_votes:
         votes = candidate_votes[candidate_name]
         vote_percentage = round(float(votes/total_votes) * 100,1)    
-        print(f"Candidate {candidate_name} recieved {vote_percentage} % of the vote\n")
+        candidate_results = (f"Candidate {candidate_name} recieved {vote_percentage} % of the vote\n")
+        print(candidate_results)
 
+    #saves candidate results to terminal
+        txt.write(candidate_results)
 
-        #determines winner
+    #determines winner and writes to txt file
         if (votes > winner_total_votes) and (vote_percentage>winner_percentage):
             winner_total_votes = votes
             winner_percentage = vote_percentage
             winner = candidate_name
-    print("------------------------------")
-    print(f"Winner: {winner}\nTotal Votes: {winner_total_votes:,}\nWinning Percentage: {winner_percentage}%")
-            
-# print(candidate_options)
-# print(total_votes)
-# print(candidate_votes)
+                
+    winning_candidate_summary = (f"------------------------\n"
+    f"Winner: {winner}\nTotal Votes: {winner_total_votes:,}\nWinning Percentage: {winner_percentage}%")
+    print(winning_candidate_summary)
+    txt.write(winning_candidate_summary)           
 
 
-#writes to txt
-with open("analysis.txt","w") as txt:
-    txt.write("Counties in the Elections\n--------------------\nArapahoe\nDenver\nJefferson")
+
+
    
 
 
