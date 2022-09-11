@@ -13,6 +13,8 @@ file_path = "resources/election_results.csv"
 total_votes = 0
 candidate_options = []
 candidate_votes = {}
+counties =[]
+county_votes = {}
 
 #winning candiate
 winner = ""
@@ -38,7 +40,18 @@ with open(file_path, "r") as election_data:
             candidate_votes[candidate_name] = 0
 
         candidate_votes[candidate_name] += 1
-        
+        #county calculation
+        county_name = row[1]
+        if county_name not in county_votes:
+            counties.append(county_name)
+            county_votes[county_name] = 0
+        county_votes[county_name] += 1
+
+    print("County Turnout")
+    print(f"The counties counted in this election were:\n",
+    counties[0], counties[1],"and", counties[2])
+    #print(county_votes)
+
 #writes to txt
 with open("election_analysis.txt","w") as txt:
     election_results = (
@@ -65,7 +78,7 @@ with open("election_analysis.txt","w") as txt:
             winner_total_votes = votes
             winner_percentage = vote_percentage
             winner = candidate_name
-                
+               
     winning_candidate_summary = (f"------------------------\n"
     f"Winner: {winner}\nTotal Votes: {winner_total_votes:,}\nWinning Percentage: {winner_percentage}%")
     print(winning_candidate_summary)
