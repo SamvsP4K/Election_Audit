@@ -16,11 +16,14 @@ candidate_votes = {}
 counties =[]
 county_votes = {}
 
-#winning candiate
+#winning candiate and county
 winner = ""
 winner_total_votes = 0
 winner_percentage = 0
-
+top_county = ""
+top_county_percentage = 0
+top_county_votes = 0
+line_break = "------------------------\n"
 #opens file in read mode
 with open(file_path, "r") as election_data:
     file_reader = csv.reader(election_data)
@@ -69,7 +72,6 @@ with open("election_analysis.txt","w") as txt:
         vote_percentage = round(float(votes/total_votes) * 100,1)    
         candidate_results = (f"Candidate {candidate_name} recieved {vote_percentage} % of the vote\n")
         print(candidate_results)
-
     #saves candidate results to terminal
         txt.write(candidate_results)
 
@@ -78,8 +80,30 @@ with open("election_analysis.txt","w") as txt:
             winner_total_votes = votes
             winner_percentage = vote_percentage
             winner = candidate_name
-               
-    winning_candidate_summary = (f"------------------------\n"
+    
+    txt.write(line_break)
+    #County Calculaton
+    print("County Turnout")
+    print("-------------------------")
+    for county_name in county_votes:
+        amount = county_votes[county_name]
+        county_percentage = round(float(amount/total_votes) * 100,1)
+        county_results = (f"{county_name} recieved {county_percentage}% of the votes\n")
+
+        txt.write(county_results)
+        print(county_results)
+
+        if (amount > top_county_votes) and (county_percentage > top_county_percentage):
+            top_county_votes = amount
+            top_county_percentage = county_percentage
+            top_county = county_name
+    print(f"The county with the highest voter turnout was {top_county} with {top_county_votes} votes. {top_county_percentage}% of the total votes.")
+
+    top_county_summary = (f"\nThe county with the highest voter turnout was {top_county} with {top_county_votes} votes. {top_county_percentage}% of the total votes.") 
+    txt.write(top_county_summary)
+
+
+    winning_candidate_summary = (f"\n------------------------\n"
     f"Winner: {winner}\nTotal Votes: {winner_total_votes:,}\nWinning Percentage: {winner_percentage}%")
     print(winning_candidate_summary)
     txt.write(winning_candidate_summary)           
