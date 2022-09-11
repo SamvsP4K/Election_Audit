@@ -7,6 +7,12 @@ Candidate Charles Casper Stockham recieved 23.0 % of the vote
 Candidate Diana DeGette recieved 73.8 % of the vote
 Candidate Raymon Anthony Doane recieved 3.1 % of the vote
 ------------------------
+Jefferson recieved 10.5% of the votes
+Denver recieved 82.8% of the votes
+Arapahoe recieved 6.7% of the votes
+
+The county with the highest voter turnout was Denver with 306055 votes. 82.8% of the total votes.
+------------------------
 Winner: Diana DeGette
 Total Votes: 272,892
 Winning Percentage: 73.8%
