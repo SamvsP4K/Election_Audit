@@ -1,4 +1,4 @@
-#Full Election Analysis
+# Full Election Analysis
 
 ##Project Overview
 Seth and Tom from the Colorado Board of elections have requested a summmary and audit of a rcent local congressional election. 
